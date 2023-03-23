@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}صفحه مورد نظر یافت نشد{% endblock %}
+
+{% block content %}
+        {% load static %}
+        <div class="text-frame" style="text-align: center;">
+            <h2>صفحه مورد نظر شما وجود ندارد</h2>
+            <a href="/" class="btn btn-primary">بازگشت به صفحه اصلی</a><br><br>
+            <img src="{% static '404.png' %}" width="400" height="400">
+        </div>
+{% endblock %}
