@@ -131,3 +131,6 @@ dmypy.json
 
 
 .idea/
+libs/sec/API.key
+models/*
+userfiles/

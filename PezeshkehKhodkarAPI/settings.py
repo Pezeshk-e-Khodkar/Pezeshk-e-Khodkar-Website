@@ -13,12 +13,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
+# It reads secret key from .env in root folder
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'pages',
+    'libs',
 ]
 
 MIDDLEWARE = [
@@ -114,7 +115,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# configure Django Rest Framework
+# Configure renderer of (Django Rest Framework)
 if not DEBUG:
     REST_FRAMEWORK = {
         'DEFAULT_RENDERER_CLASSES': (
