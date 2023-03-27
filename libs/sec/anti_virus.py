@@ -1,6 +1,6 @@
-# Anti-Virus for checking images of users of Pezeshkeh-Khodkar
+# Anti-Virus for checking images of users of Pezeshk-e-Khodkar
 # MIT License
-# Copyright (c) 2023 Pezeshkeh-Khodkar
+# Copyright (c) 2023 Pezeshk-e-Khodkar
 
 __version__ = '0.0.1'
 __author__ = 'Yasin Bakhtiar, Radin Reisi'
@@ -12,7 +12,7 @@ from django.conf import settings
 
 
 class AntiVirus:
-    """ Anti-Virus for checking images of users of Pezeshkeh-Khodkar
+    """ Anti-Virus for checking images of users of Pezeshk--eKhodkar
     """
     def __init__(self):
         # Open API key from a file
