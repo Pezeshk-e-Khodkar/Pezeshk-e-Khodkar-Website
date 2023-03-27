@@ -12,28 +12,50 @@ from libs.controller.img_uploader import ImageUploader
 from libs.controller.asd import SkinCancerDetector
 
 
-# API Page of ASD
-class AutomatedSkinCancerDetectorPage(APIView):
+class APIPage(APIView):
+
     # Start AI model
     asd = SkinCancerDetector(str(settings.BASE_DIR / "models/ASD.h5"))
+
+    diseases = ['SkinCancer']
+    throttle_scope = 'uploads'
 
     # Post Method
     def post(self, request):
 
+        if 'disease_type' not in request.data:
+            return Response({"details": "Request has no disease_type"},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        if request.data['disease_type'] not in self.diseases:
+            return Response({"details": "disease_type is wrong", "Available disease_types": self.diseases},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        # Try to get image
         try:
             image = request.data['img'].file
 
         except:
-            return Response({"details": "Request has no resource file attached"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"details": "Request has no resource file attached called (img)"},
+                            status=status.HTTP_400_BAD_REQUEST)
 
         # Verify and upload the image to server
-        uploaded_img = ImageUploader(image, str(settings.BASE_DIR / "userfiles"))
+        uploaded_img = ImageUploader(image, str(settings.BASE_DIR / "userfiles"),
+                                     request.data["disease_type"])
 
         # If the image doesn't upload:
         if uploaded_img.img_status is False:
-            return Response({"details": "File upload failed"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"details": "Upload failed"},
+                            status=status.HTTP_400_BAD_REQUEST)
+
+        # If signature of image exists:
+        elif uploaded_img.img_status is None:
+            result = uploaded_img.search_result
+            return Response({"response": result},
+                            status=status.HTTP_200_OK)
 
         else:
             # Return output of the AI model
-            return Response({"response": self.asd.detect(uploaded_img.img_address)}, status=status.HTTP_200_OK)
-
+            if request.data['disease_type'] == "SkinCancer":
+                result = self.asd.detect(image, uploaded_img.img_address)
+                return Response({"response": result}, status=status.HTTP_200_OK)

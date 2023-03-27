@@ -41,8 +41,8 @@ class ImageVerifier:
     def verify(src):
         """Is it an image or no?
         Usage:
-            api = open("/path/", "rb")
-            VerifyImage.verify(api)
+            src = open("/path/", "rb")
+            VerifyImage.verify(src)
 
         Args:
             - src: opened file

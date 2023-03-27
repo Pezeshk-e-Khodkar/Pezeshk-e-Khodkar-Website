@@ -17,8 +17,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = ["*"]
+DEBUG = True
+
+if DEBUG is False:
+    ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -30,9 +32,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'admin_honeypot',
     'api',
     'pages',
-    'libs',
 ]
 
 MIDDLEWARE = [
@@ -114,11 +116,23 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+REST_FRAMEWORK = {
+    'EXCEPTION_HANDLER': 'api.utils.custom_exception_handler',
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.ScopedRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'uploads': '5/hour'
+    }
+}
+
 
 # Configure renderer of (Django Rest Framework)
 if not DEBUG:
-    REST_FRAMEWORK = {
-        'DEFAULT_RENDERER_CLASSES': (
-            'rest_framework.renderers.JSONRenderer',
-        )
-    }
+    REST_FRAMEWORK.update(
+        {
+            'DEFAULT_RENDERER_CLASSES': (
+                'rest_framework.renderers.JSONRenderer',
+            )
+        }
+    )
