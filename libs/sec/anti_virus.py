@@ -2,7 +2,7 @@
 # MIT License
 # Copyright (c) 2023 Pezeshk-e-Khodkar
 
-__version__ = '0.0.1'
+__version__ = '0.1.0'
 __author__ = 'Yasin Bakhtiar, Radin Reisi'
 
 from libs.sec.signature_getter import SignatureGetter
@@ -12,7 +12,7 @@ from django.conf import settings
 
 
 class AntiVirus:
-    """ Anti-Virus for checking images of users of Pezeshk--eKhodkar
+    """ Anti-Virus for checking images of users of Pezeshk-e-Khodkar
     """
     def __init__(self):
         # Open API key from a file
@@ -63,7 +63,7 @@ class AntiVirus:
 
             # If it has (connection error, ...), it will return True.
             try:
-                response = vtotal.request("files", files=files, method="POST")
+                vtotal.request("files", files=files, method="POST")
 
                 try:
                     response = vtotal.request(f"files/{FileSignature}")

@@ -134,3 +134,5 @@ dmypy.json
 libs/sec/API.key
 models/*
 userfiles/
+staticfiles/
+admin_honeypot/

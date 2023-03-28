@@ -1,7 +1,7 @@
 # Automated skin cancer detector (ASD) API
 # MIT LICENSE
 
-# Import tensorflow module to load deep learning model
+# Import tensorflow module to work with deep learning model
 from tensorflow import keras, expand_dims
 
 from libs.sec.spam_detector import ImageVerifier

@@ -14,8 +14,8 @@ class FileSizeVerifier:
     def verifyFileSize(src):
         """Verify size of image ( The maximum file size should be 3 MB )
         Usage:
-        file = open(/path/, "rb")
-        VerifyImageSize.verify()
+            file = open(/path/, "rb")
+            VerifyImageSize.verify()
 
         Args:
             - src: src of file (opened in rb mode)
@@ -51,6 +51,7 @@ class ImageVerifier:
             - False: It isn't an image
         """
         try:
+            src.seek(0)
             img = Image.open(src)
             img.verify()
             return True

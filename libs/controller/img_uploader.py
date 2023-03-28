@@ -3,8 +3,10 @@
 
 # Import pillow module to work with images
 from PIL import Image
+
 import datetime
 import os
+import io
 
 from libs.sec.sec_manager import SecurityManager
 import random
@@ -13,7 +15,6 @@ from api.models import Result
 from libs.sec.signature_getter import SignatureGetter
 
 import ast
-import logging
 
 
 class ImageUploader(SecurityManager):
@@ -31,7 +32,7 @@ class ImageUploader(SecurityManager):
         - disease_type: Type of disease
     """
 
-    def __init__(self, src, save_address: str, disease_type: str):
+    def __init__(self, src: io.BytesIO, save_address: str, disease_type: str):
         super(SecurityManager, self).__init__()
         self.src = src
         self.__img_address = ''

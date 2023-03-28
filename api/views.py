@@ -13,11 +13,33 @@ from libs.controller.asd import SkinCancerDetector
 
 
 class APIPage(APIView):
+    """The page of API
+    API Usage:
+        import requests
+        src = open("path/to/image", mode="rb")
+
+        data = {
+            "disease_type": "Disease type"
+        }
+        res = requests.post(files= {"img": src},
+                            url="http://example.com/api/",
+                            data=data)
+    Response:
+        - results as a dictionary (status-code = 200)
+    Raises:
+        - "details": "Request has no disease_type" (status-code = 400)
+        - "details": "disease_type is wrong" (status-code = 400)
+        - "details": "Request has no resource file attached called (img)" (status-code = 400)
+        - "details": "Upload failed" (status-code == 400)
+    """
 
     # Start AI model
     asd = SkinCancerDetector(str(settings.BASE_DIR / "models/ASD.h5"))
 
+    # Types of diseases
     diseases = ['SkinCancer']
+
+    # Throttle
     throttle_scope = 'uploads'
 
     # Post Method
