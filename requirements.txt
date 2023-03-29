@@ -6,3 +6,4 @@ virustotal_python~=1.0.2
 Pillow~=8.1.1
 tensorflow~=2.11.0
 numpy~=1.24.1
+django-ipware~=5.0.0

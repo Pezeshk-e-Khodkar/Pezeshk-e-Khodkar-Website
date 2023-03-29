@@ -10,7 +10,7 @@ from libs.controller.img_uploader import ImageUploader
 
 # To work with ASD AI-model
 from libs.controller.asd import SkinCancerDetector
-
+from decouple import config
 
 class APIPage(APIView):
     """The page of API
@@ -34,7 +34,7 @@ class APIPage(APIView):
     """
 
     # Start AI model
-    asd = SkinCancerDetector(str(settings.BASE_DIR / "models/ASD.h5"))
+    asd = SkinCancerDetector(str(settings.BASE_DIR / "models/" / config("SKINCANCER_AI_MODEL")))
 
     # Types of diseases
     diseases = ['SkinCancer']

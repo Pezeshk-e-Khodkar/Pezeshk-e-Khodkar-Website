@@ -140,3 +140,4 @@ admin_honeypot/
 libs/tests/test_images
 libs/tests/output_images
 libs/tests/dataset.csv
+tests/

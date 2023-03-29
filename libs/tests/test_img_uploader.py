@@ -36,29 +36,33 @@ class ImageUploaderTest(django.test.TestCase):
             uploader = ImageUploader(image, os.path.abspath("libs/tests/output_images").replace("\\", "/"), "SkinCancer")
             self.assertEqual(uploader.img_status, right_answer)
 
+            # Test Image-Uploader with incorrect inputs:
+            with self.assertRaises(ValueError):
+                uploader = ImageUploader(image, os.path.abspath("libs/tests/output_images").replace("\\", "/"), "Incorrect")
+
     def test_img_address(self):
-        for i in self.csv_file:
+            for i in self.csv_file:
 
-            # If it was first row
-            if i[0] == "\ufeffFileName":
-                continue
+                # If it was first row
+                if i[0] == "\ufeffFileName":
+                    continue
 
-            elif i[5] == "1":
-                right_answer = True
+                elif i[5] == "1":
+                    right_answer = True
 
-            elif i[5] == "0":
-                right_answer = False
+                elif i[5] == "0":
+                    right_answer = False
 
-            else:
-                raise ValueError
+                else:
+                    raise ValueError
 
-            # Open Image
-            image = open(self.dir + i[0], mode="rb")
+                # Open Image
+                image = open(self.dir + i[0], mode="rb")
 
-            # Upload
-            uploader = ImageUploader(image, os.path.abspath("libs/tests/output_images").replace("\\", "/"), "SkinCancer")
+                # Upload
+                uploader = ImageUploader(image, os.path.abspath("libs/tests/output_images").replace("\\", "/"), "SkinCancer")
 
-            if right_answer:
-                self.assertNotEqual(open(uploader.img_address, "rb"), OSError)
-            else:
-                self.assertEqual(uploader.img_address, None)
+                if right_answer:
+                    self.assertNotEqual(open(uploader.img_address, "rb"), OSError)
+                else:
+                    self.assertEqual(uploader.img_address, None)
