@@ -1,17 +1,17 @@
-import unittest
+import django.test
 from libs.sec.signature_getter import SignatureGetter
 import csv  # Work with csv files
 import os
 
 
-class SignatureGetterTest(unittest.TestCase):
+class SignatureGetterTest(django.test.TestCase):
 
     def setUp(self):
         # directory of test images
-        self.dir = "./test_images/"
+        self.dir = "libs/tests/test_images/"
 
         # Load csv file
-        self.csv_file = csv.reader(open(os.path.abspath("dataset.csv"), encoding="utf-8"))
+        self.csv_file = csv.reader(open(os.path.abspath("libs/tests/dataset.csv"), encoding="utf-8"))
 
     def test_get_signature(self):
         for image in self.csv_file:

@@ -1,19 +1,19 @@
-import unittest
+import django.test
 
 from libs.controller.asd import SkinCancerDetector
 import os
 import csv  # Work with csv files
 
 
-class SkinCancerDetectorTest(unittest.TestCase):
+class SkinCancerDetectorTest(django.test.TestCase):
     def setUp(self):
-        self.asd = SkinCancerDetector("../../models/ASD.h5", True)
+        self.asd = SkinCancerDetector("models/ASD.h5")
 
         # directory of test images
-        self.dir = "./test_images/"
+        self.dir = "libs/tests/test_images/"
 
         # Load dataset.csv
-        self.csv_file = csv.reader(open(os.path.abspath("dataset.csv"), encoding="utf-8"))
+        self.csv_file = csv.reader(open(os.path.abspath("libs/tests/dataset.csv"), encoding="utf-8"))
 
     def test_detect(self):
         for image in self.csv_file:

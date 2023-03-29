@@ -1,18 +1,18 @@
-import unittest
+import django.test
 from libs.sec.anti_virus import AntiVirus
 import os
 import csv  # Work with csv files
 
 
-class AntiVirusTest(unittest.TestCase):
+class AntiVirusTest(django.test.TestCase):
     """Test of Anti-Virus
     """
     def setUp(self):
         # directory of test images
-        self.dir = "./test_images/"
+        self.dir = "libs/tests/test_images/"
 
         # Load dataset.csv
-        self.csv_file = csv.reader(open(os.path.abspath("dataset.csv"), encoding="utf-8"))
+        self.csv_file = csv.reader(open(os.path.abspath("libs/tests/dataset.csv"), encoding="utf-8"))
 
         # AntiVirus
         self.av = AntiVirus()

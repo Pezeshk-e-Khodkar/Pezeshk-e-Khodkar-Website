@@ -1,16 +1,16 @@
-import unittest
+import django.test
 from libs.sec.spam_detector import ImageVerifier, FileSizeVerifier
-import csv # Work with csv file
+import csv  # Work with csv file
 import os
 
 
-class ImageVerifierTest(unittest.TestCase):
+class ImageVerifierTest(django.test.TestCase):
     def setUp(self):
         # directory of test images
-        self.dir = "./test_images/"
+        self.dir = "libs/tests/test_images/"
 
         # Load dataset.csv
-        self.csv_file = csv.reader(open(os.path.abspath("dataset.csv"), encoding="utf-8"))
+        self.csv_file = csv.reader(open(os.path.abspath("libs/tests/dataset.csv"), encoding="utf-8"))
 
     def test_verify(self):
         for image in self.csv_file:
@@ -33,13 +33,13 @@ class ImageVerifierTest(unittest.TestCase):
             self.assertEqual(ImageVerifier.verify(image), right_answer)
 
 
-class FileSizeVerifierTest(unittest.TestCase):
+class FileSizeVerifierTest(django.test.TestCase):
     def setUp(self):
         # directory of test images
-        self.dir = "./test_images/"
+        self.dir = "libs/tests/test_images/"
 
         # Load dataset.csv
-        self.csv_file = csv.reader(open(os.path.abspath("dataset.csv"), encoding="utf-8"))
+        self.csv_file = csv.reader(open(os.path.abspath("libs/tests/dataset.csv"), encoding="utf-8"))
 
     def test_verifyFileSize(self):
 

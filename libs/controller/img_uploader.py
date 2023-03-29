@@ -14,6 +14,7 @@ import random
 from libs.sec.signature_getter import SignatureGetter
 
 import ast
+from api.models import Result
 
 
 class ImageUploader(SecurityManager):
@@ -29,17 +30,15 @@ class ImageUploader(SecurityManager):
         - src: opened image
         - save_address: saved image address
         - disease_type: Type of disease
-        - DEBUG: In debug mode, it doesn't run __search_signature()
     """
 
-    def __init__(self, src: io.BytesIO, save_address: str, disease_type: str, DEBUG=False):
+    def __init__(self, src: io.BytesIO, save_address: str, disease_type: str):
         super(SecurityManager, self).__init__()
         self.src = src
         self.__img_address = ''
         self.__img_status = False
         self.save_address = save_address
         self.disease_type = disease_type
-        self.DEBUG = DEBUG
 
         self.__upload_and_validate_image()
 
@@ -49,26 +48,22 @@ class ImageUploader(SecurityManager):
 
         # If file was an image and its size was smaller than 4mg:
         if self.verify(self.src) and self.verifyFileSize(self.src):
-
-            if self.DEBUG is False:
-                from api.models import Result
-                # Search signature database to find image if it exists
-                self.search_result = self.__search_signature()
-                if self.search_result is not False:
-                    self.__img_status = None
-                    self.__img_address = None
-                    return
-
-            # Upload the image to server
-            self.__upload()
-
-            # If the image has a virus:
-            if self.check_for_virus(self.__img_address):
-                self.__remove_img()
-                self.__img_status = False
+            # Search signature database to find image if it exists
+            self.search_result = self.__search_signature()
+            if self.search_result is not False:
+                self.__img_status = None
                 self.__img_address = None
             else:
-                self.__img_status = True
+                # Upload the image to server
+                self.__upload()
+
+                # If the image has a virus:
+                if self.check_for_virus(self.__img_address):
+                    self.__remove_img()
+                    self.__img_status = False
+                    self.__img_address = None
+                else:
+                    self.__img_status = True
 
         else:
             self.__img_status = False

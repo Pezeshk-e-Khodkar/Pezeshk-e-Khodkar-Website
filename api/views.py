@@ -34,7 +34,7 @@ class APIPage(APIView):
     """
 
     # Start AI model
-    asd = SkinCancerDetector(str(settings.BASE_DIR / "models/ASD.h5"), False)
+    asd = SkinCancerDetector(str(settings.BASE_DIR / "models/ASD.h5"))
 
     # Types of diseases
     diseases = ['SkinCancer']

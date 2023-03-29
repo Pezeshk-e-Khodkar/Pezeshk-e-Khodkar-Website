@@ -7,23 +7,19 @@ from tensorflow import keras, expand_dims
 from libs.sec.spam_detector import ImageVerifier
 from libs.sec.signature_getter import SignatureGetter
 import io
+from api.models import Result
 
 
 class SkinCancerDetector:
     """Automated Skin Cancer Detector
     Args:
         - model_address: Address of AI model
-        - DEBUG: if it was true, it doesn't run __save_result.
     """
-    def __init__(self, model_address: str, DEBUG: bool):
-        self.DEBUG = DEBUG
+    def __init__(self, model_address: str):
         try:
             self.loaded_model = keras.models.load_model(model_address)
         except Exception as e:
             raise e
-
-        if self.DEBUG is False:
-            from api.models import Result
 
     def detect(self, image: io.BytesIO, img_address: str):
         """Detect skin cancer with deep learning model
@@ -49,8 +45,7 @@ class SkinCancerDetector:
             predictions = {"basal cell carcinomas": predictions_array[0][0],
                            "melanoma": predictions_array[0][1],
                            "squamous cell carcinoma": predictions_array[0][2]}
-            if self.DEBUG is False:
-                self.__save_result(image, predictions)
+            self.__save_result(image, predictions)
 
             return predictions
         else:
