@@ -131,8 +131,12 @@ dmypy.json
 
 
 .idea/
-libs/sec/API.key
 models/*
 userfiles/
 staticfiles
 admin_honeypot/
+
+# Tests
+libs/tests/test_images
+libs/tests/output_images
+libs/tests/dataset.csv

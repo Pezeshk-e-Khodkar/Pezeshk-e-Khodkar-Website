@@ -1,0 +1,37 @@
+import unittest
+
+from libs.controller.asd import SkinCancerDetector
+import os
+import csv  # Work with csv files
+
+
+class SkinCancerDetectorTest(unittest.TestCase):
+    def setUp(self):
+        self.asd = SkinCancerDetector("../../models/ASD.h5", True)
+
+        # directory of test images
+        self.dir = "./test_images/"
+
+        # Load dataset.csv
+        self.csv_file = csv.reader(open(os.path.abspath("dataset.csv"), encoding="utf-8"))
+
+    def test_detect(self):
+        for image in self.csv_file:
+
+            # If it was first row
+            if image[0] == "\ufeffFileName":
+                continue
+
+            elif image[2] == "1":
+                right_answer = True
+
+            elif image[2] == "0":
+                right_answer = False
+
+            else:
+                raise ValueError
+
+            if right_answer is False:
+                address = self.dir + image[0]
+                self.assertEqual(self.asd.detect(open(address, "rb"), address),
+                                 "Error: File was not an image")

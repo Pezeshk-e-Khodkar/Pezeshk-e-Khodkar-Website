@@ -11,7 +11,7 @@ class FileSizeVerifier:
     """
 
     @staticmethod
-    def verifyFileSize(src):
+    def verifyFileSize(src: io.BytesIO):
         """Verify size of image ( The maximum file size should be 3 MB )
         Usage:
             file = open(/path/, "rb")
@@ -23,12 +23,9 @@ class FileSizeVerifier:
             - True: verified
             - False: Didn't verified (file should open with "rb" mode)
         """
-        if type(src) == io.BytesIO:
-            src.seek(0, os.SEEK_END)
-            if src.tell() <= 4000000:
-                return True
-            else:
-                return False
+        src.seek(0, os.SEEK_END)
+        if src.tell() <= 4000000:
+            return True
         else:
             return False
 

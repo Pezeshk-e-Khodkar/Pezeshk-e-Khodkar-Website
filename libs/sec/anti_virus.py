@@ -8,7 +8,7 @@ __author__ = 'Yasin Bakhtiar, Radin Reisi'
 from libs.sec.signature_getter import SignatureGetter
 import os
 import virustotal_python
-from django.conf import settings
+from decouple import config
 
 
 class AntiVirus:
@@ -16,8 +16,7 @@ class AntiVirus:
     """
     def __init__(self):
         # Open API key from a file
-        with open(str(settings.BASE_DIR / "libs/sec/API.key"), "r") as key_file:
-            self.api_key = key_file.read()
+        self.api_key = config("VIRUSTOTAL_API_KEY")
 
     @staticmethod
     def __check_virustotal_response(response):
