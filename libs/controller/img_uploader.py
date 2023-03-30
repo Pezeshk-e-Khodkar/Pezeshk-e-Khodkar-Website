@@ -15,7 +15,7 @@ from libs.sec.signature_getter import SignatureGetter
 
 import ast
 from api.models import Result
-from api import views
+import logging
 
 
 class ImageUploader(SecurityManager):
@@ -32,6 +32,7 @@ class ImageUploader(SecurityManager):
         - save_address: saved image address
         - disease_type: Type of disease
     """
+    diseases = ['SkinCancer']
 
     def __init__(self, src: io.BytesIO, save_address: str, disease_type: str):
         super(SecurityManager, self).__init__()
@@ -41,7 +42,7 @@ class ImageUploader(SecurityManager):
         self.__img_status = False
         self.save_address = save_address
 
-        if disease_type in views.APIPage.diseases:
+        if disease_type in self.diseases:
             self.disease_type = disease_type
         else:
             raise ValueError(disease_type + " doesn't exist.")

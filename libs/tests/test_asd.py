@@ -3,11 +3,12 @@ import django.test
 from libs.controller.asd import SkinCancerDetector
 import os
 import csv  # Work with csv files
+from decouple import config
 
 
 class SkinCancerDetectorTest(django.test.TestCase):
     def setUp(self):
-        self.asd = SkinCancerDetector("models/ASD.h5")
+        self.asd = SkinCancerDetector("models/"+config("SKINCANCER_AI_MODEL"))
 
         # directory of test images
         self.dir = "libs/tests/test_images/"

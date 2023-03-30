@@ -12,6 +12,7 @@ from libs.controller.img_uploader import ImageUploader
 from libs.controller.asd import SkinCancerDetector
 from decouple import config
 
+
 class APIPage(APIView):
     """The page of API
     API Usage:
@@ -32,15 +33,12 @@ class APIPage(APIView):
         - "details": "Request has no resource file attached called (img)" (status-code = 400)
         - "details": "Upload failed" (status-code == 400)
     """
-
     # Start AI model
     asd = SkinCancerDetector(str(settings.BASE_DIR / "models/" / config("SKINCANCER_AI_MODEL")))
 
-    # Types of diseases
-    diseases = ['SkinCancer']
-
     # Throttle
-    throttle_scope = 'uploads'
+    if settings.TEST is False:
+        throttle_scope = 'uploads'
 
     # Post Method
     def post(self, request):
@@ -49,8 +47,8 @@ class APIPage(APIView):
             return Response({"details": "Request has no disease_type"},
                             status=status.HTTP_400_BAD_REQUEST)
 
-        if request.data['disease_type'] not in self.diseases:
-            return Response({"details": "disease_type is wrong", "Available disease_types": self.diseases},
+        if request.data['disease_type'] not in ImageUploader.diseases:
+            return Response({"details": "disease_type is wrong", "Available disease_types": ImageUploader.diseases},
                             status=status.HTTP_400_BAD_REQUEST)
 
         # Try to get image
