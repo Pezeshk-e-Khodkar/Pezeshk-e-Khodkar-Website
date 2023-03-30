@@ -55,7 +55,9 @@ python manage.py runserver
 Create two folders called `output_images` and `test_images` under `libs/tests/`.
 
 ### 2. Set Test images
-Set images that you want test API with, under `libs/tests/test_images`. 
+Set images that you want test API with, under `libs/tests/test_images`.
+Also, set two images called `corrupted.jpg` and `corrupted.jpg` under `tests` folder.
+`corrupted.jpg` should be a corrupted image.
 
 ### 3. Configure `dataset.csv`
 Create a file called `dataset.csv` under `libs/tests/`
