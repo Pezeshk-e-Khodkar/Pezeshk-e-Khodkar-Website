@@ -6,7 +6,7 @@ from libs.sec.anti_virus import AntiVirus
 
 class APITest(TestCase):
     def setUp(self):
-        self.client = Client()
+        self.client = Client(enforce_csrf_checks=True)
 
     def test_pages(self):
         # Test Home Page

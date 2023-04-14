@@ -16,11 +16,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-if DEBUG is False:
-    ALLOWED_HOSTS = [config("ALLOWED_HOSTS")]
-
+DEBUG = True
 
 # Application definition
 INSTALLED_APPS = [
@@ -130,8 +126,6 @@ if TEST is False:
         }
     )
 
-
-
 # Configure renderer of (Django Rest Framework)
 if DEBUG:
     REST_FRAMEWORK.update(
@@ -150,4 +144,26 @@ else:
         }
     )
 
-APPEND_SLASH = False
+MEDIA_ROOT = BASE_DIR / "userfiles"
+
+
+# Configure SSL, HSTS, CSRF protection, XSS, Clickjacking protection and Allowed hosts
+if DEBUG is False:
+    ALLOWED_HOSTS = [config("ALLOWED_HOSTS")]
+
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+
+    # HSTS
+    SECURE_HSTS_SECONDS = 86400  # 1 day
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
+    CSRF_COOKIE_SECURE = True
+
+    # XSS protection
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+
+    # Clickjacking protection
+    X_FRAME_OPTIONS = 'DENY'

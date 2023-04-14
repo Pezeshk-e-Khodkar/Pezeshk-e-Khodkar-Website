@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}خطای 403{% endblock %}
+
+{% block content %}
+        {% load static %}
+        <div class="text-frame" style="text-align: center;">
+            <h2>خطای 403: Forbidden</h2>
+            <a href="/" class="btn btn-primary">بازگشت به صفحه اصلی</a><br><br>
+            <img src="{% static '404.png' %}" width="400" height="400">
+        </div>
+{% endblock %}
