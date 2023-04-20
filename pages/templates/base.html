@@ -51,68 +51,91 @@
                 padding-top: 20px;
             }
 
+            .blue-footer{
+                background-color: #00b7ff;
+                width: 100%;
+                padding-left: 7.5%;
+                padding-right: 7.5%;
+                padding-bottom: 10px;
+            }
+
             .img-slider{
                 margin:auto;
                 width: 60%;
             }
 
-            @media screen and (max-width: 1000px) {
+            @media (min-width:1000px)
+            {
                 .img-slider{
                     width: 80%;
                 }
+                .error-image{
+                    width: 400px;
+                }
+            }
+            @media (max-width:999.9px)
+            {
+                .error-image{
+                    width: 60%;
+                }
+            }
+
+            .content{
+                min-height: calc(100vh - 60px);
             }
         </style>
     </head>
     <body>
     <!-- Menu -->
-        <nav class="navbar navbar-expand-lg sticky-top bd-navbar" style="background-color: #00b7ff;">
-            <div class="d-lg-none" style="width: 1.5rem;"></div>
-            <div class="container-fluid">
-               <!-- Brand -->
-               <a class="navbar-brand" href="/">
-                <img src="{% static 'icon.png' %}" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-                پزشک خودکار
-               </a>
+        <div class="content">
+            <nav class="navbar navbar-expand-lg sticky-top bd-navbar" style="background-color: #00b7ff;">
+                <div class="d-lg-none" style="width: 1.5rem;"></div>
+                <div class="container-fluid">
+                   <!-- Brand -->
+                   <a class="navbar-brand" href="/">
+                    <img src="{% static 'icon.png' %}" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                    پزشک خودکار
+                   </a>
 
-               <!-- Toggle -->
-                <button class="navbar-toggler toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                   <!-- Toggle -->
+                    <button class="navbar-toggler toggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                <div class="collapse navbar-collapse" id="navbarScroll">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/#download">دانلود اپلیکیشن</a>
-                        </li>
+                    <div class="collapse navbar-collapse" id="navbarScroll">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/#download">دانلود اپلیکیشن</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/#authors">توسعه‌دهندگان</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/#authors">توسعه‌دهندگان</a>
+                            </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                راهنما
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" style="text-align: right; font-size: 18px;">
-                                <li><a class="dropdown-item" href="/#features">امکانات</a></li>
-                                <li><a class="dropdown-item" href="#">راهنمای نصب</a></li>
-                                <li><a class="dropdown-item" href="#">نحوه استفاده</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="/#FAQ">سوالات متداول</a></li>
-                            </ul>
-                        </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    راهنما
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" style="text-align: right; font-size: 18px;">
+                                    <li><a class="dropdown-item" href="/#features">امکانات</a></li>
+                                    <li><a class="dropdown-item" href="#">راهنمای نصب</a></li>
+                                    <li><a class="dropdown-item" href="#">نحوه استفاده</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/#FAQ">سوالات متداول</a></li>
+                                </ul>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link active" href="/#contact-us">ارتباط با ما</a>
-                        </li>
-                    </ul>
-              </div>
-            </div>
-        </nav>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/#contact-us">ارتباط با ما</a>
+                            </li>
+                        </ul>
+                  </div>
+                </div>
+            </nav>
+            {% block content %}{% endblock %}
+        </div>
 
-        {% block content %}{% endblock %}
-
-        <footer class="bd-footer py-2 py-md-1 mt-3" style="background-color:#00b7ff">
+        <footer class="bd-footer blue-footer">
             <p style="text-align: center; transform: translateY(35%);">کلیه حقوق مادی و معنوی متعلق به <a href="/" style="text-decoration: none;">اپلیکیشن پزشک خودکار</a> می‌باشد.</p>
         </footer>
     </body>

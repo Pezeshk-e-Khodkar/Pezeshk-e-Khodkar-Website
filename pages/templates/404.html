@@ -4,9 +4,9 @@
 
 {% block content %}
         {% load static %}
-        <div class="text-frame" style="text-align: center;">
+        <div class="text-frame" style="text-align: center; margin-bottom: 18px;">
             <h2>صفحه مورد نظر شما وجود ندارد</h2>
             <a href="/" class="btn btn-primary">بازگشت به صفحه اصلی</a><br><br>
-            <img src="{% static '404.png' %}" width="400" height="400">
+            <img src="{% static '404.png' %}" class="error-image">
         </div>
 {% endblock %}
