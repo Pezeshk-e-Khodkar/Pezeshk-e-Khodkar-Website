@@ -1,4 +1,4 @@
-# Automated skin cancer detector (ASD) API
+# Automated skin cancer detector (ASD)
 # MIT LICENSE
 
 # Import tensorflow module to work with deep learning model

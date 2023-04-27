@@ -20,6 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-__author__ = 'Yasin Bakhtiar, Radin Reisi'
-__version__ = '0.1.0'
+__author__ = 'Yasin Bakhtiar'
+__version__ = '1.0.0'
 __description__ = 'Tools of Pezeshk-e-Khodkar-API'
