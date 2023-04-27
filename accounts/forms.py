@@ -9,6 +9,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.template.loader import render_to_string
 from .token import token_generator
+from django.core.mail import send_mail
 
 
 # Registration Form
@@ -50,4 +51,5 @@ class RegistrationForm(forms.Form):
             }
         )
 
-        user.email_user(subject, message, html_message=message)
+        send_mail(subject, message, html_message=message, from_email="pezeshkekhodkar@pezeshkekhodkar.ir",
+                  recipient_list=[user.email])

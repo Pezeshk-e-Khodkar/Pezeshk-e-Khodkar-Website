@@ -176,12 +176,10 @@ RECAPTCHA_PUBLIC_KEY = config("RECAPTCHA_PUBLIC_KEY")
 RECAPTCHA_PRIVATE_KEY = config("RECAPTCHA_PRIVATE_KEY")
 RECAPTCHA_REQUIRED_SCORE = config("RECAPTCHA_REQUIRED_SCORE")
 
-# Twilio SendGrid
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_PORT = 587
+# Email
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'apikey'  # Name for all the SenGrid accounts
-EMAIL_HOST_PASSWORD = config('SENDGRID_API_KEY')
-
-# The email you'll be sending emails from
-DEFAULT_FROM_EMAIL = config('FROM_EMAIL')
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
