@@ -1,0 +1,6 @@
+<div>
+    <h2>سلام {{ user.username }}</h2>
+
+    <h3>لینک فعالسازی حساب کاربری":</h3>
+    <a href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}">تایبد حساب کاربری</a>
+</div>

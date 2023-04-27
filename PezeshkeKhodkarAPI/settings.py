@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     'admin_honeypot',  # Fake Admin Page
     'api',             # API app
     'pages',           # Web-pages
+    'accounts',         # Accounts
+    'captcha'
 ]
 
 MIDDLEWARE = [
@@ -48,7 +50,8 @@ ROOT_URLCONF = 'PezeshkeKhodkarAPI.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'pages/templates'],
+        'DIRS': [BASE_DIR / 'pages/templates',
+                 BASE_DIR / 'accounts/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -92,7 +95,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fa-ir'
 
 TIME_ZONE = 'Iran'
 
@@ -167,3 +170,18 @@ if DEBUG is False:
 
     # Clickjacking protection
     X_FRAME_OPTIONS = 'DENY'
+
+# ReCaptcha
+RECAPTCHA_PUBLIC_KEY = config("RECAPTCHA_PUBLIC_KEY")
+RECAPTCHA_PRIVATE_KEY = config("RECAPTCHA_PRIVATE_KEY")
+RECAPTCHA_REQUIRED_SCORE = config("RECAPTCHA_REQUIRED_SCORE")
+
+# Twilio SendGrid
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'apikey'  # Name for all the SenGrid accounts
+EMAIL_HOST_PASSWORD = config('SENDGRID_API_KEY')
+
+# The email you'll be sending emails from
+DEFAULT_FROM_EMAIL = config('FROM_EMAIL')

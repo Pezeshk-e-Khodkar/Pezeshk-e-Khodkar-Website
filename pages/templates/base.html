@@ -72,16 +72,50 @@
                 .error-image{
                     width: 400px;
                 }
+                .web-form{
+                    width: 30%;
+                }
             }
             @media (max-width:999.9px)
             {
                 .error-image{
                     width: 60%;
                 }
+                .web-form{
+                    width: 70%;
+                }
             }
 
             .content{
                 min-height: calc(100vh - 60px);
+            }
+
+            .web-form{
+                background-color: rgb(243, 243, 243);
+                border-radius: 10px;
+                padding: 20px;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+            .errorlist{
+                list-style-type: none;
+                color: red;
+                margin-bottom: 2px;
+            }
+            .web-form p label{
+                font-size: 18px;
+                padding-bottom: 5px;
+            }
+            .web-form p {
+                text-align: right;
+            }
+            .alert-size{
+                width:80%;
+                display:block;
+                margin-right:auto;
+                margin-left:auto;
             }
         </style>
     </head>
@@ -132,6 +166,16 @@
                   </div>
                 </div>
             </nav>
+            <br>
+            {% if messages %}
+                {% for message in messages %}
+                    <div{% if message.tags %} class="alert-size alert {{ message.tags }}" role="alert"{% endif %}>
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} خطا: {% endif %}
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
             {% block content %}{% endblock %}
         </div>
 
