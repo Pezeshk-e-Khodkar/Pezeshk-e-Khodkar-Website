@@ -1,12 +1,12 @@
 ![Pezeshk-e-Khodkar-logo]()
 # The API of Pezeshk-e-Khodkar
-**Pezeshk-e-Khodkar-API** is an API to detect diseases from images with AI models. Now, it 's available to detect skin cancer
+**Pezeshk-e-Khodkar-Webaite** is an API to detect diseases from images with AI models. Now, it 's available to detect skin cancer
 (melanoma, basal cell carcinomas and squamous cell carcinoma)
 
 ## Installing and running API
 ### 1. Clone repository
 ```
-git clone https://github.com/Pezeshk-e-Khodkar/Pezeshk-e-Khodkar-API.git
+git clone https://github.com/Pezeshk-e-Khodkar/Pezeshk-e-Khodkar-Webaite.git
 ```
 
 ### 2. Configure VENV

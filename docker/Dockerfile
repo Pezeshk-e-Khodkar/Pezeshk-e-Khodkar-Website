@@ -1,7 +1,7 @@
 FROM ubuntu:jammy
 
 # Create project directory
-WORKDIR /usr/src/PezeshkeKhodkarAPI
+WORKDIR /usr/src/PezeshkeKhodkarWebsite
 
 # Copy project
 COPY . .

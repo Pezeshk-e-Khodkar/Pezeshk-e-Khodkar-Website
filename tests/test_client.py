@@ -1,4 +1,4 @@
-from django.test.client import Client  # Use it to test Pezeshk-e-Khodkar-API
+from django.test.client import Client  # Use it to test Pezeshk-e-Khodkar-Webaite
 from django.test import TestCase # Unittest in Django
 import ast
 from libs.sec.anti_virus import AntiVirus
