@@ -3,11 +3,12 @@
 {% block title %}ثبت نام{% endblock %}
 
 {% block content %}
-    <form action="" method="post" novalidate class="web-form">
+    <form action="" method="post" class="web-form">
         <h2>ثبت نام</h2>
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">ثبت نام</button>
+        <p>قبلا ثبت نام کرده اید؟ <a href="#">ورود</a></p>
+        <button type="submit" class="btn btn-primary" value="Register">ثبت نام</button>
     </form>
     <br>
 {% endblock%}

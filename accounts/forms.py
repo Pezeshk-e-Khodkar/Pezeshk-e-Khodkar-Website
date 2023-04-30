@@ -10,17 +10,19 @@ from django.utils.http import urlsafe_base64_encode
 from django.template.loader import render_to_string
 from .token import token_generator
 from django.core.mail import send_mail
+from decouple import config
+from .validators import validate_persian
 
 
 # Registration Form
 class RegistrationForm(forms.Form):
-    username = forms.CharField(label="نام کاربری", max_length=30, min_length=3, validators=[validators.validate_slug],)
-    first_name = forms.CharField(label="نام", max_length=20, min_length=3, validators=[validators.validate_slug])
-    last_name = forms.CharField(label="نام خانوادگی", max_length=20, min_length=3, validators=[validators.validate_slug])
+    username = forms.CharField(label="نام کاربری", max_length=30, min_length=3, validators=[validate_persian])
+    first_name = forms.CharField(label="نام", max_length=20, min_length=3, validators=[validate_persian])
+    last_name = forms.CharField(label="نام خانوادگی", max_length=20, min_length=3, validators=[validate_persian])
     email = forms.EmailField(label="پست الکترونیک", max_length=200)
 
-    password = forms.CharField(label="رمز عبور", widget=forms.PasswordInput, max_length=40, min_length=8, validators=[validators.validate_slug])
-    confirm_password = forms.CharField(label="تکرار رمز عبور", widget=forms.PasswordInput(), max_length=40, validators=[validators.validate_slug])
+    password = forms.CharField(label="رمز عبور", widget=forms.PasswordInput, max_length=40, min_length=8, validators=[validate_persian])
+    confirm_password = forms.CharField(label="تکرار رمز عبور", widget=forms.PasswordInput(), max_length=40, validators=[validate_persian])
     captcha = ReCaptchaField(widget=ReCaptchaV3, label="")
 
     def __init__(self, *args, **kwargs):
@@ -40,7 +42,7 @@ class RegistrationForm(forms.Form):
 
     def send_activation_email(self, request, user):
         current_site = get_current_site(request)
-        subject = 'Activate Your Account'
+        subject = 'فعالسازی حساب کاربری پزشک خودکار'
         message = render_to_string(
             'activate_account_email_page.html',
             {
@@ -51,5 +53,5 @@ class RegistrationForm(forms.Form):
             }
         )
 
-        send_mail(subject, message, html_message=message, from_email="pezeshkekhodkar@pezeshkekhodkar.ir",
+        send_mail(subject, message, html_message=message, from_email=config("EMAIL_HOST_USER"),
                   recipient_list=[user.email])

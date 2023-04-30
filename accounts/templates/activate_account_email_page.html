@@ -1,6 +1,39 @@
-<div>
-    <h2>سلام {{ user.username }}</h2>
+<style>
+    .button {
+        border-radius: 2px;
 
-    <h3>لینک فعالسازی حساب کاربری":</h3>
-    <a href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}">تایبد حساب کاربری</a>
+    }
+
+    .button a {
+        padding: 8px 12px;
+        border: 1px solid #ED2939;
+        border-radius: 2px;
+        font-size: 14px;
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+    }
+</style>
+
+<div style="text-align: right">
+    <h1>سلام {{ user.username }}</h1>
+    <h2>به پزشک خودکار خوش آمدید</h2>
+    <h3>:لینک فعالسازی حساب کاربری شما</h3>
+
+    <table width="100%" cellspacing="0" cellpadding="0">
+        <tr>
+            <td>
+                <table cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="button" bgcolor="#ED2939">
+                            <a  class="link" href="https://{{ domain }}{% url 'activate' uidb64=uid token=token %}" target="_blank">
+                            تایید حساب کاربری
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </div>

@@ -21,10 +21,16 @@ class RegistrationPage(View):
             # Cleaned data of form
             cd = form.cleaned_data
 
-            # Search username
+            # Search username:
             query_result = User.objects.filter(username=cd["username"])
             if len(query_result) != 0:
                 messages.success(request, "این نام کاربری قبلا ثبت شده.", 'alert-danger')
+                return render(request, "registration.html", {"form": form})
+
+            # Search email:
+            query_result = User.objects.filter(email=cd["email"])
+            if len(query_result) != 0:
+                messages.success(request, "این ایمیل، قبلا ثبت شده.", 'alert-danger')
                 return render(request, "registration.html", {"form": form})
 
             # Create user

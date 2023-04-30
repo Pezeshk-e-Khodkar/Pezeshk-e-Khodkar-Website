@@ -117,18 +117,41 @@
                 margin-right:auto;
                 margin-left:auto;
             }
+            .error-frame{
+                text-align: center;
+                margin-bottom: 18px;
+            }
+            a {
+                text-decoration: none;
+            }
+            .navbar{
+                background-color: #00b7ff;
+            }
+            .d-lg-none{
+                width: 1.5rem;
+            }
+            .dropdown-menu{
+                text-align: right;
+                font-size: 18px;
+            }
+            .footer-text{
+                text-align: center;
+                transform: translateY(35%);
+            }
+            .accordion-button{
+                text-align: right;
+            }
         </style>
     </head>
     <body>
     <!-- Menu -->
         <div class="content">
-            <nav class="navbar navbar-expand-lg sticky-top bd-navbar" style="background-color: #00b7ff;">
-                <div class="d-lg-none" style="width: 1.5rem;"></div>
+            <nav class="navbar navbar-expand-lg sticky-top bd-navbar">
+                <div class="d-lg-none"></div>
                 <div class="container-fluid">
                    <!-- Brand -->
-                   <a class="navbar-brand" href="/">
-                    <img src="{% static 'icon.png' %}" alt="Logo" width="33" height="33" class="d-inline-block align-text-top">
-                    پزشک خودکار
+                   <a class="navbar-brand">
+                       <img src="{% static 'site-icon.png' %}" alt="Logo" width="170" height="40" class="d-inline-block align-text-top">
                    </a>
 
                    <!-- Toggle -->
@@ -150,7 +173,7 @@
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     راهنما
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end" style="text-align: right; font-size: 18px;">
+                                <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a class="dropdown-item" href="/#features">امکانات</a></li>
                                     <!--<li><a class="dropdown-item" href="#">راهنمای نصب</a></li>-->
                                     <li><a class="dropdown-item" href="#">نحوه استفاده</a></li>
@@ -180,7 +203,7 @@
         </div>
 
         <footer class="bd-footer blue-footer">
-            <p style="text-align: center; transform: translateY(35%);">کلیه حقوق مادی و معنوی متعلق به <a href="/" style="text-decoration: none;">اپلیکیشن پزشک خودکار</a> می‌باشد.</p>
+            <p class="footer-text">کلیه حقوق مادی و معنوی متعلق به <a href="/">اپلیکیشن پزشک خودکار</a> می‌باشد.</p>
         </footer>
     </body>
 </html>
