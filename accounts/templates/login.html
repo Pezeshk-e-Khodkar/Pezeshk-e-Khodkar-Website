@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}ورود{% endblock %}
+
+{% block content %}
+    <form action="" method="post" class="web-form">
+        <h2>ورود</h2>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <p><a href="/password_reset">رمز خود را فراموش کرده‌اید؟ </a></p>
+        <button type="submit" class="btn btn-primary" value="Login">ورود</button>
+    </form>
+    <br>
+{% endblock%}

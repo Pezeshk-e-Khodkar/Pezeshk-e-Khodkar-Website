@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import RegistrationForm
+from .forms import RegistrationForm, LoginForm
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 
 from .token import token_generator
 from django.utils.http import urlsafe_base64_decode
@@ -73,3 +74,29 @@ class ActivateView(View):
 
         else:
             return render(request, 'activate_account_invalid.html')
+
+
+class LoginView(View):
+    def get(self, request):
+        form = LoginForm()
+        return render(request, "login.html", {"form": form})
+
+    def post(self, request):
+        form = LoginForm(request.POST)
+        # If form was valid
+        if form.is_valid():
+            cd = form.cleaned_data
+            # Search username and password
+            user = authenticate(request, username=cd["username"], password=cd["password"])
+            # If user found:
+            if user is not None:
+                # login
+                login(request, user)
+                # Send a message
+                messages.success(request, "ورود با موفقیت انجام گردید", 'alert-success')
+                return redirect("dashboard")
+
+            else:
+                messages.error(request, "نام کاربری یا رمز عبور اشتباه است.", "alert-danger")
+
+        return render(request, "login.html", {"form": form})

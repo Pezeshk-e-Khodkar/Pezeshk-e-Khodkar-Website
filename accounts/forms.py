@@ -55,3 +55,17 @@ class RegistrationForm(forms.Form):
 
         send_mail(subject, message, html_message=message, from_email=config("EMAIL_HOST_USER"),
                   recipient_list=[user.email])
+
+
+# Login Form
+class LoginForm(forms.Form):
+    username = forms.CharField(label="نام کاربری", max_length=30, min_length=3,
+                               validators=[validate_persian])
+    password = forms.CharField(label="رمز عبور", widget=forms.PasswordInput, max_length=40, min_length=8,
+                               validators=[validate_persian])
+    captcha = ReCaptchaField(widget=ReCaptchaV3, label="")
+
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
