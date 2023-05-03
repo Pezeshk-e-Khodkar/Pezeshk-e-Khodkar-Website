@@ -7,7 +7,8 @@ from tensorflow import keras, expand_dims
 from libs.sec.spam_detector import ImageVerifier
 from libs.sec.signature_getter import SignatureGetter
 import io
-from api.models import Result
+from dashboard.models import Result
+from django.contrib.auth.models import User
 
 
 class SkinCancerDetector:
@@ -21,22 +22,22 @@ class SkinCancerDetector:
         except Exception as e:
             raise e
 
-    def detect(self, image: io.BytesIO, img_address: str):
+    def detect(self, image: io.BytesIO, img_address: str, user_id):
         """Detect skin cancer with deep learning model
-
-        Usage:
-            src = "./address/file.png"
-            print(SkinCancerDetector().detector(src))
-
         Arg:
             - image(BytesIO) --> Image Bytes
             - img_address(str) --> image address
+            - user_id --> user id in database
 
         Returns:
             - "Error: File was not an image"
             - Predictions of API (list)
         """
-        if ImageVerifier.verify(open(img_address, "rb")):
+        search_result = self.__search_signature(image, user_id)
+        if search_result is not False:
+            return search_result
+
+        elif ImageVerifier.verify(open(img_address, "rb")):
             img = keras.preprocessing.image.load_img(img_address, target_size=(180, 180))
             img_array = keras.preprocessing.image.img_to_array(img)
             img_array = expand_dims(img_array, 0)  # Create batch axis
@@ -45,17 +46,18 @@ class SkinCancerDetector:
             predictions = {"basal cell carcinomas": predictions_array[0][0],
                            "melanoma": predictions_array[0][1],
                            "squamous cell carcinoma": predictions_array[0][2]}
-            self.__save_result(image, predictions)
+            self.__save_result(image, predictions, user_id)
 
             return predictions
         else:
-            return "Error: File was not an image"
+            return "Error: File was not an image."
 
     @staticmethod
-    def __save_result(image, predictions):
+    def __save_result(image, predictions, user_id):
         """Save Results in DataBase
         """
         image.seek(0)
+
         # Get signature of image
         signature = SignatureGetter.get_signature(image)
 
@@ -66,3 +68,42 @@ class SkinCancerDetector:
                         )
         # Save results
         result.save()
+
+        # Attach user
+        query_result = User.objects.filter(pk=user_id)
+        result.user.add(query_result[0])
+        result.save()
+
+    def __search_signature(self, image, user_id):
+        """Search signature of image in database
+        Args:
+            - image: src of image
+        Returns:
+            - False: If signature doesn't exist.
+            - Dictionary: result of image
+        """
+        image.seek(0)
+
+        # Get signature of image
+        signature = SignatureGetter.get_signature(image)
+
+        # Search in database
+        query_result_1 = Result.objects.filter(disease_type="SkinCancer",
+                                               signature=signature)
+
+        # If this signature doesn't exist:
+        if len(query_result_1) == 0:
+            return False
+
+        else:
+            query_result_2 = Result.objects.filter(disease_type="SkinCancer",
+                                                   signature=signature, user=user_id)
+
+            if len(query_result_2) == 0:
+                query_result_3 = User.objects.filter(pk=user_id)
+                if len(query_result_3) == 0:
+                    raise Exception("User id not Found")
+
+                query_result_1[0].user.add(query_result_3[0])
+
+            return query_result_1[0].result

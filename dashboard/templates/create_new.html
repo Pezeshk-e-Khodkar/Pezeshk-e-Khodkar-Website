@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}تشخیص بیماری{% endblock %}
+
+{% block content %}
+    <form action="" method="post" class="web-form" enctype="multipart/form-data">
+        <h2>بارگذاری تصویر</h2>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary" value="UploadImage">ایجاد</button>
+    </form>
+    <br>
+{% endblock%}

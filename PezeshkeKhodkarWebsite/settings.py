@@ -28,10 +28,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',  # Django rest framework
     'admin_honeypot',  # Fake Admin Page
-    'api',             # API app
     'pages',           # Web-pages
-    'accounts',         # Accounts
-    'captcha'
+    'accounts',        # Accounts
+    'captcha',
+    'dashboard'        # Dashboard
 ]
 
 MIDDLEWARE = [
@@ -183,3 +183,6 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+
+PASSWORD_RESET_TIMEOUT_DAYS = 0.1
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

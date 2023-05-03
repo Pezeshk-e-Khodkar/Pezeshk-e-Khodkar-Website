@@ -69,3 +69,50 @@ class LoginForm(forms.Form):
         super(LoginForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
+
+
+class ResetPasswordForm(forms.Form):
+    email = forms.EmailField(label="پست الکترونیک", max_length=200)
+    captcha = ReCaptchaField(widget=ReCaptchaV3, label="")
+
+    def __init__(self, *args, **kwargs):
+        super(ResetPasswordForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+
+    def send_reset_password_email(self, request, user):
+        current_site = get_current_site(request)
+        subject = 'تغییر رمز عبور حساب کاربری پزشک خودکار'
+        message = render_to_string(
+            'reset_password_email_page.html',
+            {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': token_generator.make_token(user),
+            }
+        )
+
+        send_mail(subject, message, html_message=message, from_email=config("EMAIL_HOST_USER"),
+                  recipient_list=[user.email])
+
+
+class ChangePasswordForm(forms.Form):
+    password = forms.CharField(label="رمز عبور جدید", widget=forms.PasswordInput, max_length=40, min_length=8, validators=[validate_persian])
+    confirm_password = forms.CharField(label="تکرار رمز عبور جدید", widget=forms.PasswordInput(), max_length=40, validators=[validate_persian])
+    captcha = ReCaptchaField(widget=ReCaptchaV3, label="")
+
+    def __init__(self, *args, **kwargs):
+        super(ChangePasswordForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+
+    def clean(self):
+        cleaned_data = super(ChangePasswordForm, self).clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if password != "" and password != confirm_password:
+            self.add_error('confirm_password', "تکرار رمز عبور اشتباه وارد شده است.")
+
+        return cleaned_data

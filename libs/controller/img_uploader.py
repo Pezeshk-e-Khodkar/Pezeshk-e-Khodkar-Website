@@ -14,7 +14,7 @@ import random
 from libs.sec.signature_getter import SignatureGetter
 
 import ast
-from api.models import Result
+from dashboard.models import Result
 import logging
 
 
@@ -42,6 +42,7 @@ class ImageUploader(SecurityManager):
         self.__img_status = False
         self.save_address = save_address
 
+        # Check disease type
         if disease_type in self.diseases:
             self.disease_type = disease_type
         else:
@@ -116,7 +117,9 @@ class ImageUploader(SecurityManager):
         if self.save_address[-1] != "/":
             self.save_address += "/"
 
-        name = datetime.datetime.now().strftime("%Y%m%d%H%M%S%f") + str(random.randint(1, 9999999999))
+        self.src.seek(0)
+        # use signature to name
+        name = SignatureGetter.get_signature(self.src)
 
         self.__img_address = self.save_address + name + '.' + img.format
 
@@ -140,7 +143,6 @@ class ImageUploader(SecurityManager):
             return False
 
         else:
-            # Result as a dictionary
-            result = ast.literal_eval(query_result[0].result)
 
-            return result
+
+            return True

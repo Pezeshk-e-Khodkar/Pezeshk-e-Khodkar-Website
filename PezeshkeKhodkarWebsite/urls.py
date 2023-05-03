@@ -11,4 +11,5 @@ urlpatterns = [
     path('api/', include('api.urls')),             # API pages
     path('', include('pages.urls')),               # Pages
     path('', include('accounts.urls')),            # Pages related to Accounts
+    path('', include('dashboard.urls')),           # Dashboard
 ]
