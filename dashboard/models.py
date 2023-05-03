@@ -13,6 +13,7 @@ class Result(models.Model):
     """
     disease_type = models.CharField(max_length=64)
     signature = models.CharField(max_length=64)
+    image_format = models.CharField(max_length=64)
     result = models.TextField()
     user = models.ManyToManyField(User)
 

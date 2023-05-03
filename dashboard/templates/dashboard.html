@@ -78,6 +78,15 @@
             .btn-new{
                 margin-bottom: 15px;
             }
+            .card{
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            }
+            .empty-view{
+                text-align: center;
+                margin: auto
+                padding-top: 100px;
+                padding-bottom: 10px;
+            }
         </style>
     </head>
     <body>
@@ -111,21 +120,28 @@
                 {% endif %}
                 <a href="/app/dashboard/new" type="button" class="btn btn-primary btn-new">پردازش عکس جدید</a>
 
+                {% if model %}
                 <h3>آرشیو:</h3>
                 <div class="row gx-1 gy-3">
                     {% for obj in model %}
                         <div class="col">
                             <div class="card" style="width: 15rem;">
-                                <img src="/static/userfiles/{{ obj.signature }}.JPEG" class="card-img-top" alt="disease" height="300" width="300">
+                                <img src="/media/{{ obj.signature }}.{{ obj.image_format }}" class="card-img-top" alt="disease" height="300" width="300">
                                 <div class="card-body">
                                     <p class="card-text">نتیجه:
-                                        {{ obj.result_as_type }}
+                                        <b style="color:red;">{{ obj.result_as_type }}</b>
                                     </p>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
                 </div>
+                {% else %}
+                    <div class="empty-view">
+                        <img src="{% static 'no-results.png' %}" style="width: 10%;">
+                        <h3>تصویری یافت نشد.</h3>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </body>

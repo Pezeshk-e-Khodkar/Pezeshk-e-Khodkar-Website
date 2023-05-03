@@ -15,7 +15,10 @@ class DashboardView(View):
         # If user logged in, it should show dashboard.
         if request.user.is_authenticated:
             data = Result.objects.filter(user=request.user.pk)
-            return render(request, 'dashboard.html', {"model": data})
+            if len(data) != 0:
+                return render(request, 'dashboard.html', {"model": data})
+            else:
+                return render(request, 'dashboard.html')
         else:
             return redirect("login")
 
@@ -48,7 +51,7 @@ class CreateNewView(View):
                 disease_type = "SkinCancer"
 
             # Verify and upload the image to server
-            uploaded_img = ImageUploader(image, str(settings.BASE_DIR / "staticfiles" / "userfiles"),
+            uploaded_img = ImageUploader(image, str(settings.BASE_DIR / "media"),
                                          disease_type)
 
             # If the image doesn't upload:
@@ -56,7 +59,7 @@ class CreateNewView(View):
                 messages.error(request, "خطا: تصویر بارگذاری نشد.", 'alert-danger')
 
             else:
-                self.asd.detect(image, uploaded_img.img_address, request.user.pk)
+                self.asd.detect(image, uploaded_img.img_address, uploaded_img.image_format, request.user.pk)
                 messages.success(request, "تصویر با موفقیت بارگذاری و پردازش شد.", 'alert-success')
 
             return redirect("dashboard")

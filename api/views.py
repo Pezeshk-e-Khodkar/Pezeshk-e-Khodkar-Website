@@ -60,7 +60,7 @@ class APIPage(APIView):
                             status=status.HTTP_400_BAD_REQUEST)
 
         # Verify and upload the image to server
-        uploaded_img = ImageUploader(image, str(settings.BASE_DIR / "userfiles"),
+        uploaded_img = ImageUploader(image, str(settings.BASE_DIR / "media"),
                                      request.data["disease_type"])
 
         # If the image doesn't upload:

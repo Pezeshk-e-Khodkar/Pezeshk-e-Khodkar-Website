@@ -41,6 +41,7 @@ class ImageUploader(SecurityManager):
         self.__img_address = ''
         self.__img_status = False
         self.save_address = save_address
+        self.image_format = ''
 
         # Check disease type
         if disease_type in self.diseases:
@@ -61,6 +62,7 @@ class ImageUploader(SecurityManager):
             if self.search_result is not False:
                 self.__img_status = None
                 self.__img_address = None
+                self.image_format = None
             else:
                 # Upload the image to server
                 self.__upload()
@@ -70,6 +72,7 @@ class ImageUploader(SecurityManager):
                     self.__remove_img()
                     self.__img_status = False
                     self.__img_address = None
+                    self.image_format = None
                 else:
                     self.__img_status = True
 
@@ -120,8 +123,9 @@ class ImageUploader(SecurityManager):
         self.src.seek(0)
         # use signature to name
         name = SignatureGetter.get_signature(self.src)
+        self.image_format = img.format.lower()
 
-        self.__img_address = self.save_address + name + '.' + img.format
+        self.__img_address = self.save_address + name + '.' + self.image_format
 
     def __search_signature(self):
         """Search signature of image in database
@@ -143,6 +147,4 @@ class ImageUploader(SecurityManager):
             return False
 
         else:
-
-
             return True

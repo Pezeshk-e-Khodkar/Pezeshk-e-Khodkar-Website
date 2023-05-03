@@ -22,11 +22,12 @@ class SkinCancerDetector:
         except Exception as e:
             raise e
 
-    def detect(self, image: io.BytesIO, img_address: str, user_id):
+    def detect(self, image: io.BytesIO, img_address: str, img_format: str, user_id):
         """Detect skin cancer with deep learning model
         Arg:
             - image(BytesIO) --> Image Bytes
             - img_address(str) --> image address
+            - img_format (str) --> image format
             - user_id --> user id in database
 
         Returns:
@@ -46,15 +47,20 @@ class SkinCancerDetector:
             predictions = {"basal cell carcinomas": predictions_array[0][0],
                            "melanoma": predictions_array[0][1],
                            "squamous cell carcinoma": predictions_array[0][2]}
-            self.__save_result(image, predictions, user_id)
+            self.__save_result(image, predictions, img_format, user_id)
 
             return predictions
         else:
             return "Error: File was not an image."
 
     @staticmethod
-    def __save_result(image, predictions, user_id):
+    def __save_result(image, predictions, img_format, user_id):
         """Save Results in DataBase
+        Args:
+            - image: src of image
+            - predictions: results of ai as a dictionary
+            - img_format: image format
+            - user_id: id of user
         """
         image.seek(0)
 
@@ -64,7 +70,8 @@ class SkinCancerDetector:
         result = Result(
                         disease_type="SkinCancer",
                         signature=signature,
-                        result=str(predictions)
+                        result=str(predictions),
+                        image_format=img_format
                         )
         # Save results
         result.save()
@@ -78,6 +85,7 @@ class SkinCancerDetector:
         """Search signature of image in database
         Args:
             - image: src of image
+            - user_id : id of user
         Returns:
             - False: If signature doesn't exist.
             - Dictionary: result of image

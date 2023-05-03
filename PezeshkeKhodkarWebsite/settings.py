@@ -147,7 +147,7 @@ else:
         }
     )
 
-MEDIA_ROOT = BASE_DIR / "userfiles"
+MEDIA_ROOT = BASE_DIR / "media"
 
 
 # Configure SSL, HSTS, CSRF protection, XSS, Clickjacking protection and Allowed hosts
@@ -186,3 +186,7 @@ EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
 PASSWORD_RESET_TIMEOUT_DAYS = 0.1
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# Media
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = 'media/'
