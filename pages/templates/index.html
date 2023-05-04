@@ -2,6 +2,10 @@
 
 {% block title %}پزشک خودکار{% endblock %}
 
+{% block head %}
+    <meta name="description" content="تشخیص بیماری از تصاویر با هوش مصنوعی">
+{% endblock %}
+
 {% block content %}
         {% load static %}
         <div class="text-frame">
@@ -87,7 +91,7 @@
                 <div class="container px-5 py-2 text-center">
                     <div class="row gx-5 gy-2">
                         <div class="col">
-                            <img src="{% static 'yasin_bakhtiar.png' %}" class="profile-image" height="170" weight="170">
+                            <img src="{% static 'yasin_bakhtiar.png' %}" class="profile-image" height="170" weight="170" alt="Author">
                             <h5 class="white-text">یاسین بختیار</h5>
                         </div>
                     </div>
