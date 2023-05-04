@@ -1,6 +1,6 @@
-![Pezeshk-e-Khodkar-logo]()
-# The API of Pezeshk-e-Khodkar
-**Pezeshk-e-Khodkar-Webaite** is an API to detect diseases from images with AI models. Now, it 's available to detect skin cancer
+![Pezeshk-e-Khodkar-logo](pages/static/site-icon.png)
+# The Website of Pezeshk-e-Khodkar
+**Pezeshk-e-Khodkar-Webaite** is a website that can detect diseases from images with AI models. Now, it 's available to detect skin cancer
 (melanoma, basal cell carcinomas and squamous cell carcinoma)
 
 ## Installing and running API
@@ -23,6 +23,11 @@ ADMIN_URL = 'Url of admin page on the website'
 ALLOWED_HOSTS = 'http://yourdomain.com'
 VIRUSTOTAL_API_KEY = 'API-key of VirusTotal'
 SKINCANCER_AI_MODEL = 'name of Skin Cancer AI model'
+RECAPTCHA_PUBLIC_KEY = 'Public Key of recaptch'
+RECAPTCHA_PRIVATE_KEY = 'Private Key of recaptch'
+RECAPTCHA_REQUIRED_SCORE = 0.85
+EMAIL_HOST_USER = 'A Gmail that we use it to send emails.'
+EMAIL_HOST_PASSWORD = 'Password App of your gmail'
 ```
 ### 5. Add admin-honeypot app
 Download [admin-honeypot](https://github.com/dmpayton/django-admin-honeypot/)
