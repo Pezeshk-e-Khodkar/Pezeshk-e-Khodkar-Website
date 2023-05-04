@@ -70,9 +70,10 @@
                     width: 90%;
                 }
             }
-            @media (max-width: 673px){
-                .card{
-                    margin: auto;
+            @media (max-width: 794.9px){
+                .col{
+                    margin-left: auto;
+                    margin-right: auto;
                 }
             }
             .btn-new{
@@ -112,30 +113,46 @@
                 {% if messages %}
                     {% for message in messages %}
                         <div{% if message.tags %} class="alert-size alert {{ message.tags }} alert-dismissible fade show" role="alert"{% endif %}>
-                            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} خطا: {% endif %}
+                            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}{% endif %}
                             {{ message }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" style="right:auto; left:0;"></button>
                         </div>
                     {% endfor %}
                 {% endif %}
-                <a href="/app/dashboard/new" type="button" class="btn btn-primary btn-new">پردازش عکس جدید</a>
+                <a href="/app/dashboard/new" type="button" class="btn btn-primary btn-new">پردازش تصویر جدید</a>
 
                 {% if model %}
                 <h3>آرشیو:</h3>
                 <div class="row gx-1 gy-3">
                     {% for obj in model %}
-                        <div class="col">
+                        <div class="col" style="flex: 0 1 1%; padding-left:30px; padding-right:30px;">
                             <div class="card" style="width: 15rem;">
                                 <img src="/media/{{ obj.signature }}.{{ obj.image_format }}" class="card-img-top" alt="disease" height="300" width="300">
                                 <div class="card-body">
-                                    <p class="card-text">نتیجه:
+                                    <p class="card-text">
+                                        ابزار:
+                                        <b style="color:red">{{ obj.disease_as_persian}}</b>
+                                        نتیجه:
                                         <b style="color:red;">{{ obj.result_as_type }}</b>
                                     </p>
+                                    <form action="/app/dashboard/delete/{{ obj.pk }}" method="post" class="web-form">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger" value="DeleteImage">
+                                            حذف
+                                        </button>
+                                        <a class="btn btn-primary" href="/media/{{ obj.signature }}.{{ obj.image_format }}" download>
+                                            دانلود
+                                        </a>
+                                        <a class="btn btn-primary" href="{{ obj.result_help_link }}" target="_blank">
+                                            مشاوره
+                                        </a>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     {% endfor %}
                 </div>
+                <br>
                 {% else %}
                     <div class="empty-view">
                         <img src="{% static 'no-results.png' %}" style="width: 10%;">

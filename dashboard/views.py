@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib import messages
 from decouple import config
 from .models import Result
+from .models import *
 
 
 # Dashboard view:
@@ -64,3 +65,31 @@ class CreateNewView(View):
 
             return redirect("dashboard")
         return render(request, "create_new.html", {"form": form})
+
+
+class DeleteImageView(View):
+    def post(self, request, image_id):
+        # If user didn't log in, it should show log-in form.
+        if request.user.is_authenticated is False:
+            return redirect("login")
+
+        else:
+            try:
+                id = int(image_id)
+            except:
+                messages.error(request, "خطا: تصویر موردنظر یافت نشد.", 'alert-danger')
+                return redirect("dashboard")
+
+            query_result = Result.objects.filter(pk=id, user=request.user.pk)
+            if len(query_result) == 0:
+                messages.error(request, "خطا: تصویر موردنظر یافت نشد.", 'alert-danger')
+                return redirect("dashboard")
+            else:
+                query_result[0].user.remove(request.user.pk)
+                query_result[0].save()
+
+                messages.success(request, "تصویر با موفقیت حذف شد.", 'alert-success')
+                return redirect("dashboard")
+
+    def get(self, request, image_id):
+        return render(request, "404.html")

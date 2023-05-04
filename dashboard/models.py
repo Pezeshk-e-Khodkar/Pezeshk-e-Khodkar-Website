@@ -17,6 +17,10 @@ class Result(models.Model):
     result = models.TextField()
     user = models.ManyToManyField(User)
 
+    melanoma_help_link = "https://pardiscancer.com/blog/%D9%85%D9%84%D8%A7%D9%86%D9%88%D9%85%D8%A7"
+    basal_cell_carcinomas_help_link = "https://doctoreto.com/blog/about-basal-cell-carcinoma/#:~:text=%DA%A9%D8%A7%D8%B1%D8%B3%DB%8C%D9%86%D9%88%D9%85%20%D8%A8%D8%A7%D8%B2%D8%A7%D9%84%20%D9%86%D9%88%D8%B9%DB%8C%20%D8%B3%D8%B1%D8%B7%D8%A7%D9%86%20%D8%A7%D8%B3%D8%AA,%D9%86%D9%88%D8%B9%20%D8%B3%D9%84%D9%88%D9%84%E2%80%8C%D9%87%D8%A7%DB%8C%20%D8%B3%D8%B1%D8%B7%D8%A7%D9%86%DB%8C%20%D8%A7%DB%8C%D8%AC%D8%A7%D8%AF%20%D9%85%DB%8C%E2%80%8C%D8%B4%D9%88%D9%86%D8%AF."
+    squamous_cell_carcinoma_help_link = "https://doctoreto.com/blog/about-squamous-cell-carcinoma/"
+
     def result_as_json(self):
         # Result as a dictionary
         return ast.literal_eval(self.result)
@@ -34,7 +38,7 @@ class Result(models.Model):
                 if json_result[disease] == max_value:
                     return self.type_as_persian(disease)
         else:
-            raise ValueError("It doesnt have "+self.disease_type+".")
+            raise ValueError("It doesn't have "+self.disease_type+".")
 
     def type_as_persian(self, disease):
         if disease == "basal cell carcinomas":
@@ -44,4 +48,19 @@ class Result(models.Model):
         elif disease == "squamous cell carcinoma":
             return "سرطان سلول سنگ‌فرشی"
         else:
-            raise ValueError("It doesnt have "+disease+".")
+            raise ValueError("It doesn't have "+disease+".")
+
+    def disease_as_persian(self):
+        if self.disease_type == "SkinCancer":
+            return "تشخیص سرطان پوست"
+        else:
+            raise ValueError("It doesn't have "+self.disease_type+".")
+
+    def result_help_link(self):
+        result = self.result_as_type()
+        if result == "ملانوما":
+            return self.melanoma_help_link
+        elif result == "کارسینوم سلول های بازال":
+            return self.basal_cell_carcinomas_help_link
+        elif result == "سرطان سلول سنگ‌فرشی":
+            return self.squamous_cell_carcinoma_help_link

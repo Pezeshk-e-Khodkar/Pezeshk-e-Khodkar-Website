@@ -53,7 +53,9 @@ class RegistrationPage(View):
             form.send_activation_email(self.request, user)
 
             # Send a message
-            messages.success(request, "ثبت نام با موفقیت انجام شد. لطفا از طریق ایمیل ارسال شده، حساب کاربری را تایید نمایید.", 'alert-success')
+            messages.success(request,
+                             "ثبت نام با موفقیت انجام شد. لطفا از طریق ایمیل ارسال شده، حساب کاربری را تایید نمایید.",
+                             'alert-success')
 
             # Back to signup page
             return redirect("login")
@@ -150,7 +152,9 @@ class ResetPasswordView(View):
                 form.send_reset_password_email(self.request, query_result[0])
 
                 # Send a message
-                messages.success(request, "ایمیل ارسال گردید. لطفا از طریق ایمیل، رمز عبور خود را تغییر دهید.", 'alert-success')
+                messages.success(request,
+                                 "ایمیل ارسال گردید. لطفا از طریق ایمیل، رمز عبور خود را تغییر دهید.",
+                                 'alert-success')
 
             else:
                 messages.error(request, "خطا: ایمیل یافت نشد.", 'alert-danger')

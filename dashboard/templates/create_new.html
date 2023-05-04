@@ -6,6 +6,7 @@
     <form action="" method="post" class="web-form" enctype="multipart/form-data">
         <h2>بارگذاری تصویر</h2>
         {% csrf_token %}
+        <h6 align="center">لطفا از بارگذاری تصاویر نامربوط خودداری کنید.</h6>
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary" value="UploadImage">ایجاد</button>
     </form>
