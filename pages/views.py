@@ -7,3 +7,8 @@ class HomeView(View):
     """
     def get(self, request):
         return render(request, 'index.html')
+
+
+class HelpPage(View):
+    def get(self, request):
+        return render(request, 'help_page.html')

@@ -16,6 +16,16 @@
         <link rel="icon" type="image/x-icon" href="{% static 'icon.png' %}">
         <title>{% block title %} {% endblock %}</title>
 
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-2R7JRWVW25"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-2R7JRWVW25');
+        </script>
+
         <style>
             @font-face {
                 font-family: IranSans;
@@ -41,7 +51,7 @@
             .text-frame{
                 padding-top: 20px;
                 width: 85%;
-                margin: auto
+                margin: auto;
             }
 
             .blue-text-frame{
@@ -146,6 +156,37 @@
             .left-nav{
                 margin-right: auto;
             }
+            h1{
+                font-size: 35px;
+            }
+            h2{
+                font-size: 30px;
+            }
+            h3{
+                font-size: 25px;
+            }
+            .blue-text-frame-title{
+                font-weight: bold;
+                text-align: center;
+                color:white;
+            }
+            .list-table{
+                padding-top:25px;
+            }
+            .list-table-ul{
+                padding-right:0;
+                margin: auto;
+                width: 80%;
+            }
+            .bold-text{
+                font-weight: bold;
+            }
+            .white-text{
+                color:white;
+            }
+            .profile-image{
+                border-radius:100%;
+            }
         </style>
     </head>
     <body>
@@ -155,7 +196,7 @@
                 <div class="d-lg-none"></div>
                 <div class="container-fluid">
                    <!-- Brand -->
-                   <a class="navbar-brand">
+                   <a class="navbar-brand" href="/">
                        <img src="{% static 'site-icon.png' %}" alt="Logo" width="170" height="40" class="d-inline-block align-text-top">
                    </a>
 
@@ -181,7 +222,7 @@
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a class="dropdown-item" href="/#features">امکانات</a></li>
                                     <!--<li><a class="dropdown-item" href="#">راهنمای نصب</a></li>-->
-                                    <li><a class="dropdown-item" href="#">نحوه استفاده</a></li>
+                                    <li><a class="dropdown-item" href="/help">نحوه استفاده</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="/#FAQ">سوالات متداول</a></li>
                                 </ul>

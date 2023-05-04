@@ -42,7 +42,7 @@ class Result(models.Model):
 
     def type_as_persian(self, disease):
         if disease == "basal cell carcinomas":
-            return "کارسینوم سلول های بازال"
+            return "کارسینوم سلول بازال"
         elif disease == "melanoma":
             return "ملانوما"
         elif disease == "squamous cell carcinoma":
@@ -60,7 +60,7 @@ class Result(models.Model):
         result = self.result_as_type()
         if result == "ملانوما":
             return self.melanoma_help_link
-        elif result == "کارسینوم سلول های بازال":
+        elif result == "کارسینوم سلول بازال":
             return self.basal_cell_carcinomas_help_link
         elif result == "سرطان سلول سنگ‌فرشی":
             return self.squamous_cell_carcinoma_help_link
