@@ -7,6 +7,7 @@
         <h2>بارگذاری تصویر</h2>
         {% csrf_token %}
         <h6 align="center">لطفا از بارگذاری تصاویر نامربوط خودداری کنید.</h6>
+        <h6 align="center">حداکثر حجم ارسالی <b style="color:red;">4 مگابایت</b> می‌باشد.</h6>
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary" value="UploadImage">ایجاد</button>
     </form>

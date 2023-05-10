@@ -35,7 +35,7 @@ class ImageVerifier:
     """
 
     @staticmethod
-    def verify(src):
+    def verify(src: io.BytesIO):
         """Is it an image or no?
         Usage:
             src = open("/path/", "rb")
