@@ -31,7 +31,7 @@ class Result(models.Model):
             max_value = max(json_result["basal cell carcinomas"],
                             json_result["melanoma"],
                             json_result["squamous cell carcinoma"])
-            if max_value <= 0.5:
+            if max_value <= 0.6:
                 return "سالم"
 
             for disease in json_result:
