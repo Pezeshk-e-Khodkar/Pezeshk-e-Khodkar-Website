@@ -30,8 +30,8 @@ INSTALLED_APPS = [
     'admin_honeypot',  # Fake Admin Page
     'pages',           # Web-pages
     'accounts',        # Accounts
-    'captcha',
-    'dashboard'        # Dashboard
+    'captcha',         # Google Captcha
+    'dashboard',        # Dashboard
 ]
 
 MIDDLEWARE = [
