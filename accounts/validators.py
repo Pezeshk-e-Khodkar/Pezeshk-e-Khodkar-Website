@@ -3,6 +3,13 @@ from django.utils.translation import gettext_lazy
 
 
 def validate_persian(value):
+    """Persian Validator
+    Info:
+        Default validator of Django doesn't allow to write persian letters.
+        We should use this.
+    """
+
+    # Black_list
     black_list = [" ", "`", "~", "!", "@", "#", "$", "%", "^", "&", "*",
                   "(", ")", "[", "]", "{", "}", "\\", "|", ":", ";", "\"",
                   "\'", ">", "<", ".", "?", "؟", "+", "=", ",", "-", "/"

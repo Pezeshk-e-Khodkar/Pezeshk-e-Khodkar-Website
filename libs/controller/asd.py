@@ -14,7 +14,7 @@ from django.contrib.auth.models import User
 class SkinCancerDetector:
     """Automated Skin Cancer Detector
     Args:
-        - model_address: Address of AI model
+        - model_address: address of AI model
     """
     def __init__(self, model_address: str):
         try:
@@ -22,13 +22,13 @@ class SkinCancerDetector:
         except Exception as e:
             raise e
 
-    def detect(self, image: io.BytesIO, img_address: str, img_format: str, user_id):
+    def detect(self, image: io.BytesIO, img_address: str, img_format: str, user_id: int):
         """Detect skin cancer with deep learning model
         Arg:
-            - image(BytesIO) --> Image Bytes
-            - img_address(str) --> image address
-            - img_format (str) --> image format
-            - user_id --> user id in database
+            - image(BytesIO): image Bytes
+            - img_address(str): image address
+            - img_format (str): image format
+            - user_id(int): user id in database
 
         Returns:
             - "Error: File was not an image"
@@ -54,13 +54,13 @@ class SkinCancerDetector:
             return "Error: File was not an image."
 
     @staticmethod
-    def __save_result(image, predictions, img_format, user_id):
+    def __save_result(image, predictions, img_format: str, user_id: int):
         """Save Results in DataBase
         Args:
             - image: src of image
             - predictions: results of ai as a dictionary
-            - img_format: image format
-            - user_id: id of user
+            - img_format(str): image format
+            - user_id(int): id of user
         """
         image.seek(0)
 
@@ -81,11 +81,11 @@ class SkinCancerDetector:
         result.user.add(query_result[0])
         result.save()
 
-    def __search_signature(self, image, user_id):
+    def __search_signature(self, image, user_id: int):
         """Search signature of image in database
         Args:
             - image: src of image
-            - user_id : id of user
+            - user_id(int) : id of user
         Returns:
             - False: If signature doesn't exist.
             - Dictionary: result of image
