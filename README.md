@@ -29,6 +29,14 @@ RECAPTCHA_REQUIRED_SCORE = 0.85
 EMAIL_HOST_USER = 'A Gmail that we use it to send emails.'
 EMAIL_HOST_PASSWORD = 'Password App of your gmail'
 ```
+Also, if you want to upload this website to a server (DEBUG=False), it uses mysql with config options below:
+```
+MYSQL_DB_NAME= 'Database name'
+MYSQL_DB_USER= 'DataBase user'
+MYSQL_DB_PASSWORD= 'user's password'
+MYSQL_DB_HOST='Database host'
+MYSQL_DB_PORT='Database port'
+```
 ### 5. Add admin-honeypot app
 Download [admin-honeypot](https://github.com/dmpayton/django-admin-honeypot/)
 and copy `admin-honeypot` folder under root folder of project.

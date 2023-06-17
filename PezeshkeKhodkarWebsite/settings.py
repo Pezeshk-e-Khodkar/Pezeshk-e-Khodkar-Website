@@ -70,12 +70,24 @@ WSGI_APPLICATION = 'PezeshkeKhodkarWebsite.wsgi.application'
 
 
 # Database config
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG is True:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': config.config("MYSQL_DB_NAME"),
+            'USER': config.config("MYSQL_DB_USER"),
+            'PASSWORD': config.config("MYSQL_DB_PASSWORD"),
+            'HOST': config.config("MYSQL_DB_HOST"),
+            'PORT': config.config("MYSQL_DB_PORT")
+        }
+    }
 
 
 # Password validation
