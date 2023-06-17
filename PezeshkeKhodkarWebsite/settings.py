@@ -8,7 +8,7 @@ from pathlib import Path
 from decouple import config
 import sys
 
-# BASE DIR
+# BASE DIR of project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -31,9 +31,10 @@ INSTALLED_APPS = [
     'pages',           # Web-pages
     'accounts',        # Accounts
     'captcha',         # Google Captcha
-    'dashboard',        # Dashboard
+    'dashboard',       # Dashboard
 ]
 
+# Middlewares
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -47,6 +48,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'PezeshkeKhodkarWebsite.urls'
 
+# Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -67,7 +69,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'PezeshkeKhodkarWebsite.wsgi.application'
 
 
-# Database
+# Database config
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -111,41 +113,42 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# If site is running in test mode
 TEST = 'test' in sys.argv
 
-# Django rest framework settings:
-REST_FRAMEWORK = {
-    'EXCEPTION_HANDLER': 'api.utils.custom_exception_handler',
-    'DEFAULT_THROTTLE_CLASSES': [
-        'rest_framework.throttling.ScopedRateThrottle',
-    ],
-}
-if TEST is False:
-    REST_FRAMEWORK.update(
-        {'DEFAULT_THROTTLE_RATES':
-            {
-                'uploads': '5/hour',
-            }
-        }
-    )
-
-# Configure renderer of (Django Rest Framework)
-if DEBUG:
-    REST_FRAMEWORK.update(
-        {
-            'DEFAULT_RENDERER_CLASSES': (
-                'rest_framework.renderers.BrowsableAPIRenderer',
-            )
-        }
-    )
-else:
-    REST_FRAMEWORK.update(
-        {
-            'DEFAULT_RENDERER_CLASSES': (
-                'rest_framework.renderers.JSONRenderer',
-            )
-        }
-    )
+# # Django rest framework settings:
+# REST_FRAMEWORK = {
+#     'EXCEPTION_HANDLER': 'api.utils.custom_exception_handler',
+#     'DEFAULT_THROTTLE_CLASSES': [
+#         'rest_framework.throttling.ScopedRateThrottle',
+#     ],
+# }
+# if TEST is False:
+#     REST_FRAMEWORK.update(
+#         {'DEFAULT_THROTTLE_RATES':
+#             {
+#                 'uploads': '5/hour',
+#             }
+#         }
+#     )
+#
+# # Configure renderer of (Django Rest Framework)
+# if DEBUG:
+#     REST_FRAMEWORK.update(
+#         {
+#             'DEFAULT_RENDERER_CLASSES': (
+#                 'rest_framework.renderers.BrowsableAPIRenderer',
+#             )
+#         }
+#     )
+# else:
+#     REST_FRAMEWORK.update(
+#         {
+#             'DEFAULT_RENDERER_CLASSES': (
+#                 'rest_framework.renderers.JSONRenderer',
+#             )
+#         }
+#     )
 
 MEDIA_ROOT = BASE_DIR / "media"
 
@@ -184,6 +187,7 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 
+# This configs uses to close the email validations
 PASSWORD_RESET_TIMEOUT_DAYS = 0.1
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 

@@ -3,7 +3,7 @@
 **Pezeshk-e-Khodkar-Webaite** is a website that can detect diseases from images with AI models. Now, it 's available to detect skin cancer
 (melanoma, basal cell carcinomas and squamous cell carcinoma)
 
-## Installing and running API
+## Installing and running Website
 ### 1. Clone repository
 ```
 git clone https://github.com/Pezeshk-e-Khodkar/Pezeshk-e-Khodkar-Webaite.git
@@ -34,7 +34,7 @@ Download [admin-honeypot](https://github.com/dmpayton/django-admin-honeypot/)
 and copy `admin-honeypot` folder under root folder of project.
 
 ### 6. Create folders
-Create two folders called `userfiles` and  `models` under root folder.
+Create two folders called `media` and  `models` under root folder.
 
 ### 7. Configure AI model
 Put AI model file under `models` folder.
@@ -61,8 +61,6 @@ Create two folders called `output_images` and `test_images` under `libs/tests/`.
 
 ### 2. Set Test images
 Set images that you want test API with, under `libs/tests/test_images`.
-Also, set two images called `corrupted.jpg` and `corrupted.jpg` under `tests` folder.
-`corrupted.jpg` should be a corrupted image.
 
 ### 3. Configure `dataset.csv`
 Create a file called `dataset.csv` under `libs/tests/`

@@ -1,3 +1,4 @@
+# Import django test library
 import django.test
 
 from libs.controller.img_uploader import ImageUploader
@@ -6,6 +7,10 @@ import csv  # Work with csv files
 
 
 class ImageUploaderTest(django.test.TestCase):
+    """Test of ImageUploader class
+    Raise:
+        - ValueError: dataset.csv is broke.
+    """
     def setUp(self):
         # directory of test images
         self.dir = "libs/tests/test_images/"
@@ -41,28 +46,28 @@ class ImageUploaderTest(django.test.TestCase):
                 uploader = ImageUploader(image, os.path.abspath("libs/tests/output_images").replace("\\", "/"), "Incorrect")
 
     def test_img_address(self):
-            for i in self.csv_file:
+        for i in self.csv_file:
 
-                # If it was first row
-                if i[0] == "\ufeffFileName":
-                    continue
+            # If it was first row
+            if i[0] == "\ufeffFileName":
+                continue
 
-                elif i[5] == "1":
-                    right_answer = True
+            elif i[5] == "1":
+                right_answer = True
 
-                elif i[5] == "0":
-                    right_answer = False
+            elif i[5] == "0":
+                right_answer = False
 
-                else:
-                    raise ValueError
+            else:
+                raise ValueError
 
-                # Open Image
-                image = open(self.dir + i[0], mode="rb")
+            # Open Image
+            image = open(self.dir + i[0], mode="rb")
 
-                # Upload
-                uploader = ImageUploader(image, os.path.abspath("libs/tests/output_images").replace("\\", "/"), "SkinCancer")
+            # Upload
+            uploader = ImageUploader(image, os.path.abspath("libs/tests/output_images").replace("\\", "/"), "SkinCancer")
 
-                if right_answer:
-                    self.assertNotEqual(open(uploader.img_address, "rb"), OSError)
-                else:
-                    self.assertEqual(uploader.img_address, None)
+            if right_answer:
+                self.assertNotEqual(open(uploader.img_address, "rb"), OSError)
+            else:
+                self.assertEqual(uploader.img_address, None)

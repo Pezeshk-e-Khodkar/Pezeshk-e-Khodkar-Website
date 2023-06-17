@@ -3,7 +3,7 @@ import hashlib
 
 
 class SignatureGetter:
-    """It gets signature of files
+    """Get the signatures of the files
     """
     @staticmethod
     def get_signature(src):
@@ -11,8 +11,9 @@ class SignatureGetter:
         Args:
             - src: file address or opened file
         Returns:
-            - Sha256 signature of file
+            - Sha256 signature of the file(str)
         """
+        # If src is a string
         if type(src) == str:
             with open(src, 'rb') as file:
                 byte = file.read()  # read entire file as bytes

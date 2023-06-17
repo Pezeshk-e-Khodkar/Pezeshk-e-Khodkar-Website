@@ -1,3 +1,4 @@
+# Import django test library
 import django.test
 from libs.sec.signature_getter import SignatureGetter
 import csv  # Work with csv files
@@ -5,7 +6,8 @@ import os
 
 
 class SignatureGetterTest(django.test.TestCase):
-
+    """Test of SignatureGetter class
+    """
     def setUp(self):
         # directory of test images
         self.dir = "libs/tests/test_images/"
@@ -16,6 +18,7 @@ class SignatureGetterTest(django.test.TestCase):
     def test_get_signature(self):
         for image in self.csv_file:
 
+            # If it was first row
             if image[0] == "\ufeffFileName":
                 continue
 

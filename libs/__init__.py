@@ -22,4 +22,4 @@
 
 __author__ = 'Yasin Bakhtiar'
 __version__ = '1.0.0'
-__description__ = 'Tools of Pezeshk-e-Khodkar-Webaite'
+__description__ = 'Tools of Pezeshk-e-Khodkar-Website'

@@ -103,6 +103,7 @@
     </head>
     <body>
         <div class="content">
+            <!-- Navbar of dashboard -->
             <nav class="navbar navbar-expand-lg sticky-top bd-navbar">
                 <div class="container-fluid">
                     <a class="navbar-brand">
@@ -132,6 +133,7 @@
                 {% endif %}
                 <a href="/app/dashboard/new" type="button" class="btn btn-primary btn-new">پردازش تصویر جدید</a>
 
+                <!-- Archive -->
                 {% if model %}
                 <h3>آرشیو:</h3>
                 <div class="row gx-1 gy-3">
@@ -164,6 +166,7 @@
                     {% endfor %}
                 </div>
                 <br>
+                <!-- No image found -->
                 {% else %}
                     <div class="empty-view">
                         <img src="{% static 'no-results.png' %}" style="width: 10%;">

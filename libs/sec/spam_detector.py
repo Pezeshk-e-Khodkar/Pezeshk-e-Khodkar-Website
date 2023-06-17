@@ -12,10 +12,10 @@ class FileSizeVerifier:
 
     @staticmethod
     def verifyFileSize(src: io.BytesIO):
-        """Verify size of image ( The maximum file size should be 3 MB )
+        """Verify size of image ( The maximum file size should be 4 MB )
         Usage:
             file = open(/path/, "rb")
-            VerifyImageSize.verify()
+            VerifyImageSize.verifyFileSize(file)
 
         Args:
             - src: src of file (opened in rb mode)

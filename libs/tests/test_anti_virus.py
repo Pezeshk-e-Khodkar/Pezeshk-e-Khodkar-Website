@@ -1,3 +1,4 @@
+# Import django test library
 import django.test
 from libs.sec.anti_virus import AntiVirus
 import os
@@ -5,7 +6,9 @@ import csv  # Work with csv files
 
 
 class AntiVirusTest(django.test.TestCase):
-    """Test of Anti-Virus
+    """Test of Anti-Virus class
+    Raise:
+        - ValueError: dataset.csv is broke.
     """
     def setUp(self):
         # directory of test images

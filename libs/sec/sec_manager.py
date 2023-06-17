@@ -4,4 +4,6 @@ from libs.sec.spam_detector import FileSizeVerifier
 
 
 class SecurityManager(AntiVirus, ImageVerifier, FileSizeVerifier):
+    """A class with AntiVirus, ImageVerifier and FileSizeVerifier
+    """
     pass

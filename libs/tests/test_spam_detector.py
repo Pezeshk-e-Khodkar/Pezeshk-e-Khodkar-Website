@@ -1,3 +1,4 @@
+# Import django test library
 import django.test
 from libs.sec.spam_detector import ImageVerifier, FileSizeVerifier
 import csv  # Work with csv file
@@ -5,6 +6,10 @@ import os
 
 
 class ImageVerifierTest(django.test.TestCase):
+    """Test of ImageVerifier class
+    Raise:
+        - ValueError: dataset.csv is broke.
+    """
     def setUp(self):
         # directory of test images
         self.dir = "libs/tests/test_images/"
@@ -34,6 +39,10 @@ class ImageVerifierTest(django.test.TestCase):
 
 
 class FileSizeVerifierTest(django.test.TestCase):
+    """Test of FileSizeVerifier class
+    Raise:
+        - ValueError: dataset.csv is broke.
+    """
     def setUp(self):
         # directory of test images
         self.dir = "libs/tests/test_images/"
